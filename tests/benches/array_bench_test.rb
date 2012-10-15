@@ -1,7 +1,7 @@
 require "../test_helper"
 
 class ArrayBenchTest < MiniTest::Unit::TestCase
-  TRAILS    = 1000
+  TRAILS    = 2_000
   THRESHOLD = 0.95
 
   def self.bench_range
@@ -19,10 +19,12 @@ class ArrayBenchTest < MiniTest::Unit::TestCase
   def bench_concat
     assert_performance_linear(THRESHOLD) do |n|
       subject = Array.new(n)
-      TRAILS.times { |trial| subject + [1] }
+      concat = [1]
+      TRAILS.times { |trial| subject + concat }
     end
   end
 
+  # Very close to O(1) time on 1.9.3
   def bench_unshift
     assert_performance_linear(THRESHOLD) do |n|
       subject = Array.new(n)
