@@ -1,0 +1,14 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    addressable (2.3.2)
+    gchartrb (0.8)
+    launchy (2.1.2)
+      addressable (~> 2.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  gchartrb (~> 0.8.0)
+  launchy (~> 2.1.2)
