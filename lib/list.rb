@@ -62,7 +62,7 @@ class List
     each_node { |node| yield node.value }
   end
 
-  def fetch(key)
+  def [](key)
     return nil if key >= size
     each_with_index { |value, index| return value if key == index }
   end

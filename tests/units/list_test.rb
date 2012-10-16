@@ -49,16 +49,16 @@ EOS
       subject.map { |node| node }.must_equal []
     end
 
-    it "fetches index 0" do
-      subject.fetch(0).must_be_nil
+    it "gets index 0" do
+      subject[0].must_be_nil
     end
 
-    it "fetches index 1" do
-      subject.fetch(1).must_be_nil
+    it "gets index 1" do
+      subject[1].must_be_nil
     end
 
-    it "fetches index 2" do
-      subject.fetch(2).must_be_nil
+    it "gets index 2" do
+      subject[2].must_be_nil
     end
 
     it "reads last" do
@@ -123,16 +123,16 @@ EOS
       subject.map { |node| node }.must_equal [1]
     end
 
-    it "fetches index 0" do
-      subject.fetch(0).must_equal 1
+    it "gets index 0" do
+      subject[0].must_equal 1
     end
 
-    it "fetches index 1" do
-      subject.fetch(1).must_be_nil
+    it "gets index 1" do
+      subject[1].must_be_nil
     end
 
-    it "fetches index 2" do
-      subject.fetch(2).must_be_nil
+    it "gets index 2" do
+      subject[2].must_be_nil
     end
 
     it "reads last" do
@@ -199,16 +199,16 @@ EOS
       subject.map { |node| node }.must_equal [1, 2]
     end
 
-    it "fetches index 0" do
-      subject.fetch(0).must_equal 1
+    it "gets index 0" do
+      subject[0].must_equal 1
     end
 
-    it "fetches index 1" do
-      subject.fetch(1).must_equal 2
+    it "gets index 1" do
+      subject[1].must_equal 2
     end
 
-    it "fetches index 2" do
-      subject.fetch(2).must_be_nil
+    it "gets index 2" do
+      subject[2].must_be_nil
     end
 
     it "reads last" do
@@ -271,16 +271,16 @@ EOS
       subject.map { |node| node }.must_equal [1, 2, 3]
     end
 
-    it "fetches index 0" do
-      subject.fetch(0).must_equal 1
+    it "gets index 0" do
+      subject[0].must_equal 1
     end
 
-    it "fetches index 1" do
-      subject.fetch(1).must_equal 2
+    it "gets index 1" do
+      subject[1].must_equal 2
     end
 
-    it "fetches index 2" do
-      subject.fetch(2).must_equal 3
+    it "gets index 2" do
+      subject[2].must_equal 3
     end
 
     it "reads last" do
