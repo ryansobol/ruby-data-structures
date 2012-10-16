@@ -14,4 +14,17 @@ class Node
 
     @next = nexxt
   end
+
+  def ==(another)
+    return false if another.nil?
+    self.value == another.value && self.next == another.next
+  end
+
+  def to_s
+    value.to_s
+  end
+
+  def inspect
+    "#<#{self.class}:#{self.object_id} @value=#{self.value.inspect}, @next=#{self.next.inspect}>"
+  end
 end

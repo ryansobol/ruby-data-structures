@@ -27,6 +27,36 @@ describe Node do
       exception = proc { subject.next = 2 }.must_raise(RuntimeError)
       exception.message.must_equal "Expected next to be nil or a Node object"
     end
+
+    it "compares successfully" do
+      subject.must_equal subject
+      subject.must_equal Node.new(1, nil)
+
+      subject.next = Node.new(2)
+      subject.must_equal subject
+      subject.must_equal Node.new(1, Node.new(2))
+    end
+
+    it "compares unsuccessfully" do
+      subject.wont_equal nil
+      subject.wont_equal Node.new(2, nil)
+      subject.wont_equal Node.new(1, subject)
+
+      subject.next = Node.new(2)
+      subject.wont_equal nil
+      subject.wont_equal Node.new(2, nil)
+      subject.wont_equal Node.new(1, subject)
+    end
+
+    it "converts to a String" do
+      subject.to_s.must_equal "1"
+    end
+
+    it "inspects itself" do
+      subject.inspect.must_equal <<-EOS.chomp
+#<#{subject.class}:#{subject.object_id} @value=#{subject.value.inspect}, @next=#{subject.next.inspect}>
+EOS
+    end
   end
 
   #############################################################################
