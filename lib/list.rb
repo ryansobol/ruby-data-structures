@@ -34,6 +34,7 @@ class List
 
   def unshift
     temp = first
+    @size = size - 1 unless empty?
     @head = self.next
     temp
   end
@@ -61,10 +62,9 @@ class List
     each_node { |node| yield node.value }
   end
 
-  def [](key)
+  def fetch(key)
     return nil if key >= size
     each_with_index { |value, index| return value if key == index }
-    nil
   end
 
   # TODO: See Array#[]=

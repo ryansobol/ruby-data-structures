@@ -24,6 +24,10 @@ describe List do
 
     it "unshifts all items" do
       subject.unshift.must_be_nil
+      subject.size.must_equal 0
+
+      GC.start
+      ObjectSpace.each_object(Node).count.must_equal 0
     end
 
     it "converts to a String" do
@@ -45,16 +49,16 @@ EOS
       subject.map { |node| node }.must_equal []
     end
 
-    it "gets index 0" do
-      subject[0].must_be_nil
+    it "fetches index 0" do
+      subject.fetch(0).must_be_nil
     end
 
-    it "gets index 1" do
-      subject[1].must_be_nil
+    it "fetches index 1" do
+      subject.fetch(1).must_be_nil
     end
 
-    it "gets index 2" do
-      subject[2].must_be_nil
+    it "fetches index 2" do
+      subject.fetch(2).must_be_nil
     end
 
     it "reads last" do
@@ -93,6 +97,10 @@ EOS
     it "unshifts all items" do
       subject.unshift.must_equal 1
       subject.unshift.must_be_nil
+      subject.size.must_equal 0
+
+      GC.start
+      ObjectSpace.each_object(Node).count.must_equal 0
     end
 
     it "converts to a String" do
@@ -115,16 +123,16 @@ EOS
       subject.map { |node| node }.must_equal [1]
     end
 
-    it "gets index 0" do
-      subject[0].must_equal 1
+    it "fetches index 0" do
+      subject.fetch(0).must_equal 1
     end
 
-    it "gets index 1" do
-      subject[1].must_be_nil
+    it "fetches index 1" do
+      subject.fetch(1).must_be_nil
     end
 
-    it "gets index 2" do
-      subject[2].must_be_nil
+    it "fetches index 2" do
+      subject.fetch(2).must_be_nil
     end
 
     it "reads last" do
@@ -164,6 +172,10 @@ EOS
       subject.unshift.must_equal 1
       subject.unshift.must_equal 2
       subject.unshift.must_be_nil
+      subject.size.must_equal 0
+
+      GC.start
+      ObjectSpace.each_object(Node).count.must_equal 0
     end
 
     it "converts to a String" do
@@ -187,16 +199,16 @@ EOS
       subject.map { |node| node }.must_equal [1, 2]
     end
 
-    it "gets index 0" do
-      subject[0].must_equal 1
+    it "fetches index 0" do
+      subject.fetch(0).must_equal 1
     end
 
-    it "gets index 1" do
-      subject[1].must_equal 2
+    it "fetches index 1" do
+      subject.fetch(1).must_equal 2
     end
 
-    it "gets index 2" do
-      subject[2].must_be_nil
+    it "fetches index 2" do
+      subject.fetch(2).must_be_nil
     end
 
     it "reads last" do
@@ -237,6 +249,10 @@ EOS
       subject.unshift.must_equal 2
       subject.unshift.must_equal 3
       subject.unshift.must_be_nil
+      subject.size.must_equal 0
+
+      GC.start
+      ObjectSpace.each_object(Node).count.must_equal 0
     end
 
     it "converts to a String" do
@@ -255,16 +271,16 @@ EOS
       subject.map { |node| node }.must_equal [1, 2, 3]
     end
 
-    it "gets index 0" do
-      subject[0].must_equal 1
+    it "fetches index 0" do
+      subject.fetch(0).must_equal 1
     end
 
-    it "gets index 1" do
-      subject[1].must_equal 2
+    it "fetches index 1" do
+      subject.fetch(1).must_equal 2
     end
 
-    it "gets index 2" do
-      subject[2].must_equal 3
+    it "fetches index 2" do
+      subject.fetch(2).must_equal 3
     end
 
     it "reads last" do
