@@ -49,7 +49,10 @@ describe Node do
     end
 
     it "converts to a String" do
-      subject.to_s.must_equal "1"
+      subject.to_s.must_equal "(1)"
+
+      subject.next = Node.new(2)
+      subject.to_s.must_equal "(1 (2))"
     end
 
     it "inspects itself" do

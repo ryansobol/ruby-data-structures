@@ -21,7 +21,8 @@ class Node
   end
 
   def to_s
-    value.to_s
+    return "(#{value})" if self.next.nil?
+    "(#{value} #{self.next})"
   end
 
   def inspect
