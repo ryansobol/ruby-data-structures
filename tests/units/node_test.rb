@@ -2,11 +2,15 @@ require "../../lib/node"
 require "../test_helper"
 
 describe Node do
-  describe "given a Node with an integer value and a nil next" do
-    subject { Node.new(1, nil) }
+  describe "given a Node with an integer value" do
+    subject { Node.new(1) }
 
     it "reads value" do
       subject.value.must_equal 1
+    end
+
+    it "reads prev" do
+      subject.prev.must_be_nil
     end
 
     it "reads next" do
@@ -18,61 +22,76 @@ describe Node do
       subject.value.must_equal 42
     end
 
+    it "sets prev with a Node object" do
+      subject.prev = expected = Node.new(42)
+      subject.prev.must_equal expected
+    end
+
+    it "sets prev with an invalid argument" do
+      exception = proc { subject.prev = 42 }.must_raise(RuntimeError)
+      exception.message.must_equal "Expected prev to be nil or a Node object"
+    end
+
     it "sets next with a Node object" do
-      subject.next = expected = Node.new(42, nil)
+      subject.next = expected = Node.new(42)
       subject.next.must_equal expected
     end
 
     it "sets next with an invalid argument" do
-      exception = proc { subject.next = 2 }.must_raise(RuntimeError)
+      exception = proc { subject.next = 42 }.must_raise(RuntimeError)
       exception.message.must_equal "Expected next to be nil or a Node object"
     end
 
     it "compares successfully" do
       subject.must_equal subject
-      subject.must_equal Node.new(1, nil)
+      subject.must_equal Node.new(1)
 
-      subject.next = Node.new(2)
+      subject.prev = Node.new(2)
       subject.must_equal subject
       subject.must_equal Node.new(1, Node.new(2))
+
+      subject.next = Node.new(3)
+      subject.must_equal subject
+      subject.must_equal Node.new(1, Node.new(2), Node.new(3))
     end
 
     it "compares unsuccessfully" do
-      subject.wont_equal nil
-      subject.wont_equal Node.new(2, nil)
-      subject.wont_equal Node.new(1, subject)
+      subject.prev = Node.new(2)
+      subject.next = Node.new(3)
 
-      subject.next = Node.new(2)
       subject.wont_equal nil
-      subject.wont_equal Node.new(2, nil)
-      subject.wont_equal Node.new(1, subject)
+
+      subject.wont_equal Node.new(4,    Node.new(2),  Node.new(4))
+      subject.wont_equal Node.new(nil,  Node.new(2),  Node.new(4))
+
+      subject.wont_equal Node.new(1,    Node.new(2),  Node.new(4))
+      subject.wont_equal Node.new(1,    Node.new(2),  nil)
+
+      subject.wont_equal Node.new(1,    Node.new(4),  Node.new(3))
+      subject.wont_equal Node.new(1,    nil,          Node.new(3))
     end
 
     it "converts to a String" do
       subject.to_s.must_equal "(1)"
 
-      subject.next = Node.new(2)
-      subject.to_s.must_equal "(1 (2))"
-    end
+      subject.prev = Node.new(2)
+      subject.next = Node.new(3)
 
-    it "inspects itself" do
-      subject.inspect.must_equal <<-EOS.chomp
-#<#{subject.class}:#{subject.object_id} @value=#{subject.value.inspect}, @next=#{subject.next.inspect}>
-EOS
+      subject.to_s.must_equal "(1 (3))"
     end
   end
 
   #############################################################################
 
   describe "not given a Node" do
-    it "initializes with an invalid next" do
+    it "initializes with an invalid prev" do
       exception = proc { Node.new(1, 2) }.must_raise(RuntimeError)
-      exception.message.must_equal "Expected next to be nil or a Node object"
+      exception.message.must_equal "Expected prev to be nil or a Node object"
     end
 
-    it "initializes with no next" do
-      node = Node.new(1)
-      node.next.must_be_nil
+    it "initializes with an invalid next" do
+      exception = proc { Node.new(1, nil, 3) }.must_raise(RuntimeError)
+      exception.message.must_equal "Expected next to be nil or a Node object"
     end
   end
 end

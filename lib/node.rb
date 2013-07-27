@@ -1,9 +1,10 @@
 class Node
   attr_accessor :value
-  attr_reader :next
+  attr_reader :prev, :next
 
-  def initialize(value, nexxt = nil)
+  def initialize(value, prev = nil, nexxt = nil)
     @value = value
+    self.prev = prev
     self.next = nexxt
   end
 
@@ -15,17 +16,21 @@ class Node
     @next = nexxt
   end
 
+  def prev=(prevv)
+    unless prevv.nil? || prevv.is_a?(Node)
+      raise "Expected prev to be nil or a Node object"
+    end
+
+    @prev = prevv
+  end
+
   def ==(another)
-    return false if another.nil?
-    self.value == another.value && self.next == another.next
+    return false unless another
+    self.value == another.value && self.prev == another.prev && self.next == another.next
   end
 
   def to_s
-    return "(#{value})" if self.next.nil?
+    return "(#{value})" unless self.next
     "(#{value} #{self.next})"
-  end
-
-  def inspect
-    "#<#{self.class}:#{self.object_id} @value=#{self.value.inspect}, @next=#{self.next.inspect}>"
   end
 end
