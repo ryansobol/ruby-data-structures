@@ -4,8 +4,11 @@ class List
   include Enumerable
 
   def initialize(*items)
+    @size = 0
     items.reverse.each { |item| shift(item) }
   end
+
+  attr_reader :size
 
   attr_reader :head
   protected :head
@@ -23,18 +26,14 @@ class List
   end
   protected :next
 
-  def size
-    @size || 0
-  end
-
   def shift(item)
     @head = Node.new(item, head)
-    @size = size + 1
+    @size += 1
   end
 
   def unshift
     temp = first
-    @size = size - 1 unless empty?
+    @size -= 1 unless empty?
     @head = self.next
     temp
   end
@@ -84,7 +83,7 @@ class List
   def push(item)
     return shift(item) if empty?
     tail.next = Node.new(item)
-    return @size = size + 1
+    return @size += 1
   end
 
   # TODO: See #unshift
