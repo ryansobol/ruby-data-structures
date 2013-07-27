@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-ruby "1.9.3"
+ruby "2.0.0"
 
 gem "minitest",     "~> 4.1.0"
 gem "gchartrb",     "~> 0.8.0"
