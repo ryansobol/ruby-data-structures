@@ -1,5 +1,5 @@
-require "../../../lib/linked_list/node"
-require "../../test_helper"
+require_relative "../../test_helper"
+require "linked_list/node"
 
 describe LinkedList::Node do
   describe "given a LinkedList::Node with an integer value" do

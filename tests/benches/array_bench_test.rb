@@ -1,4 +1,4 @@
-require "../test_helper"
+require_relative "../test_helper"
 
 class ArrayBenchTest < MiniTest::Unit::TestCase
   TRAILS    = 2_000

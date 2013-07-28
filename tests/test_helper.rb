@@ -1,5 +1,12 @@
-require 'minitest/autorun'
-require 'minitest/benchmark'
+$LOAD_PATH.unshift(File.expand_path("../../lib", __FILE__))
+
+require "minitest/autorun"
+require "minitest/benchmark"
+
+# ruby test/test_helper.rb
+if __FILE__ == $0
+  Dir.glob(File.expand_path("../units/**/*_test.rb", __FILE__)) { |file| require file }
+end
 
 # require "google_chart"
 # require "launchy"

@@ -1,5 +1,5 @@
-require "../../lib/linked_list"
-require "../test_helper"
+require_relative "../test_helper"
+require "linked_list"
 
 describe LinkedList do
   describe "given a empty LinkedList" do

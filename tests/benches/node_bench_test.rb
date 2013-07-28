@@ -1,5 +1,5 @@
-require "../../lib/linked_list/node"
-require "../test_helper"
+require_relative "../test_helper"
+require "linked_list/node"
 
 class LinkedListNodeBenchTest < MiniTest::Unit::TestCase
   TRIALS = 300_000
