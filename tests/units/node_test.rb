@@ -29,7 +29,7 @@ describe Node do
 
     it "sets prev with an invalid argument" do
       exception = proc { subject.prev = 42 }.must_raise(RuntimeError)
-      exception.message.must_equal "Expected prev to be nil or a Node object"
+      exception.message.must_equal "prev must be nil or a Node instance"
     end
 
     it "sets next with a Node object" do
@@ -39,7 +39,7 @@ describe Node do
 
     it "sets next with an invalid argument" do
       exception = proc { subject.next = 42 }.must_raise(RuntimeError)
-      exception.message.must_equal "Expected next to be nil or a Node object"
+      exception.message.must_equal "next must be nil or a Node instance"
     end
 
     it "clears" do
@@ -87,12 +87,12 @@ describe Node do
   describe "not given a Node" do
     it "initializes with an invalid prev" do
       exception = proc { Node.new(1, 2) }.must_raise(RuntimeError)
-      exception.message.must_equal "Expected prev to be nil or a Node object"
+      exception.message.must_equal "prev must be nil or a Node instance"
     end
 
     it "initializes with an invalid next" do
       exception = proc { Node.new(1, nil, 3) }.must_raise(RuntimeError)
-      exception.message.must_equal "Expected next to be nil or a Node object"
+      exception.message.must_equal "next must be nil or a Node instance"
     end
   end
 end
