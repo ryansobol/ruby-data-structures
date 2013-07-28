@@ -2,9 +2,9 @@ class Node
   attr_accessor :value
   attr_reader :prev, :next
 
-  def initialize(value, prev = nil, nexxt = nil)
-    @value = value
-    self.prev = prev
+  def initialize(value, prevv = nil, nexxt = nil)
+    @value    = value
+    self.prev = prevv
     self.next = nexxt
   end
 
@@ -24,13 +24,14 @@ class Node
     @prev = prevv
   end
 
-  def ==(another)
-    return false unless another
-    self.value == another.value && self.prev == another.prev && self.next == another.next
+  def clear
+    temp = value
+    self.value = self.next = self.prev = nil
+    temp
   end
 
-  def to_s
-    return "(#{value})" unless self.next
-    "(#{value} #{self.next})"
+  def ==(other)
+    return false unless other
+    self.value == other.value && self.prev == other.prev && self.next == other.next
   end
 end

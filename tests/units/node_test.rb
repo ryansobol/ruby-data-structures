@@ -42,6 +42,16 @@ describe Node do
       exception.message.must_equal "Expected next to be nil or a Node object"
     end
 
+    it "clears" do
+      subject.next = Node.new(42)
+      subject.prev = Node.new(24)
+
+      subject.clear.must_equal 1
+      subject.value.must_be_nil
+      subject.next.must_be_nil
+      subject.prev.must_be_nil
+    end
+
     it "compares successfully" do
       subject.must_equal subject
       subject.must_equal Node.new(1)
@@ -69,15 +79,6 @@ describe Node do
 
       subject.wont_equal Node.new(1,    Node.new(4),  Node.new(3))
       subject.wont_equal Node.new(1,    nil,          Node.new(3))
-    end
-
-    it "converts to a String" do
-      subject.to_s.must_equal "(1)"
-
-      subject.prev = Node.new(2)
-      subject.next = Node.new(3)
-
-      subject.to_s.must_equal "(1 (3))"
     end
   end
 

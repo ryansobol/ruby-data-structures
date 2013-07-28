@@ -3,90 +3,180 @@ require_relative "node"
 class List
   include Enumerable
 
+  # O(n)
   def initialize(*items)
     @size = 0
-    items.reverse.each { |item| shift(item) }
+    items.each { |item| push(item) }
   end
 
+  #################################################################################################
+
+  # O(1)
   attr_reader :size
 
-  attr_reader :head
-  protected :head
+  # O(1)
+  attr_reader :head, :tail
+  protected :head, :tail
 
+  #################################################################################################
+
+  # O(1)
   def empty?
     head.nil?
   end
 
+  # O(1)
   def first
     empty? ? nil : head.value
   end
 
-  def next
-    empty? ? nil : head.next
+  # O(1)
+  def last
+    empty? ? nil : tail.value
   end
-  protected :next
 
-  def shift(item)
-    @head = Node.new(item, head)
+  #################################################################################################
+
+  # O(1)
+  def shift(value)
     @size += 1
+    @head = Node.new(value, nil, head)
+
+    if size == 1
+      @tail = head
+    else
+      head.next.prev = head
+    end
+
+    size
   end
 
+  # O(1)
   def unshift
-    temp = first
-    @size -= 1 unless empty?
-    @head = self.next
-    temp
+    return nil if empty?
+
+    @size -= 1
+
+    temp  = head
+    @head = temp.next
+
+    if size == 0
+      @tail = nil
+    else
+      head.prev = nil
+    end
+
+    temp.clear
   end
 
-  def to_s
-    return "(#{first})" if self.next.nil?
-    "(#{first} #{self.next})"
+  #################################################################################################
+
+  # O(1)
+  def push(value)
+    @size += 1
+
+    @tail = Node.new(value, tail)
+
+    if size == 1
+      @head = tail
+    else
+      tail.prev.next = tail
+    end
+
+    size
   end
 
-  def inspect
-    "#<#{self.class}:#{self.object_id} @size=#{self.size}, @head=#{self.head.inspect}, @next=#{self.next.inspect}>"
+  # O(1)
+  def pop
+    return nil if empty?
+
+    @size -= 1
+
+    temp  = tail
+    @tail = temp.prev
+
+    if size == 0
+      @head = nil
+    else
+      tail.next = nil
+    end
+
+    temp.clear
   end
 
+  #################################################################################################
+
+  # O(n)
   def each_node
     current = head
+
     while current
       yield current
+
       current = current.next
     end
   end
   protected :each_node
 
+  # O(n)
+  def each_node_with_index
+    current = head
+    index   = 0
+
+    while current
+      yield current, index
+
+      current = current.next
+      index   += 1
+    end
+  end
+  protected :each_node_with_index
+
+  #################################################################################################
+
+  # O(n)
   def each
     return to_enum(:each) unless block_given?
+
     each_node { |node| yield node.value }
   end
 
+  # O(n)
   def [](key)
-    return nil if key >= size
+    return if key < 0 || key >= size
+
     each_with_index { |value, index| return value if key == index }
   end
 
-  # TODO: See Array#[]=
-  # def []=(key, value)
-  # end
+  # O(n)
+  def []=(key, value)
+    return if key < 0 || key >= size
 
-  # TODO: Use an instance variable similar to @head
-  def tail
-    each_node { |node| return node if node.next.nil? }
-  end
-  protected :tail
+    node = each_node_with_index do |node, index|
+      break node if key == index
+    end
 
-  def last
-    empty? ? nil : tail.value
+    node.value = value
   end
 
-  def push(item)
-    return shift(item) if empty?
-    tail.next = Node.new(item)
-    return @size += 1
+  #################################################################################################
+
+  # O(n)
+  def to_a
+    map { |value| value }
   end
 
-  # TODO: See #unshift
-  # def pop
-  # end
+  # O(n)
+  def to_s
+    stop      = size - 1
+    output    = ""
+    seperator = ", "
+
+    each_with_index do |value, index|
+      output << value.inspect
+      output << seperator unless index == stop
+    end
+
+    "(#{output})"
+  end
 end

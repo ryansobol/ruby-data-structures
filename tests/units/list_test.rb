@@ -5,21 +5,27 @@ describe List do
   describe "given a empty List" do
     subject { List.new }
 
+    it "has the correct size" do
+      subject.size.must_equal 0
+    end
+
     it "is empty" do
       subject.must_be_empty
     end
 
-    it "reads first" do
+    it "has the correct first" do
       subject.first.must_be_nil
     end
 
-    it "reads size" do
-      subject.size.must_equal 0
+    it "has the correct last" do
+      subject.last.must_be_nil
     end
 
     it "shifts an item" do
-      subject.shift(1).must_equal 1
+      subject.shift(42).must_equal 1
       subject.size.must_equal 1
+      subject.first.must_equal 42
+      subject.last.must_equal 42
     end
 
     it "unshifts all items" do
@@ -30,14 +36,19 @@ describe List do
       ObjectSpace.each_object(Node).count.must_equal 0
     end
 
-    it "converts to a String" do
-      subject.to_s.must_equal "()"
+    it "pushes an item" do
+      subject.push(42).must_equal 1
+      subject.size.must_equal 1
+      subject.first.must_equal 42
+      subject.last.must_equal 42
     end
 
-    it "inspects itself" do
-      subject.inspect.must_equal <<-EOS.chomp
-#<#{subject.class}:#{subject.object_id} @size=#{subject.size}, @head=#{subject.send(:head).inspect}, @next=#{subject.send(:next).inspect}>
-EOS
+    it "pops all items" do
+      subject.pop.must_be_nil
+      subject.size.must_equal 0
+
+      GC.start
+      ObjectSpace.each_object(Node).count.must_equal 0
     end
 
     it "converts to an enumerator" do
@@ -45,57 +56,85 @@ EOS
       proc { enumerator.next }.must_raise(StopIteration)
     end
 
-    it "maps each item" do
-      subject.map { |node| node }.must_equal []
+    it "maps each value" do
+      subject.map { |value| value }.must_equal []
     end
 
-    it "gets index 0" do
+    it "gets the value at index -1" do
+      subject[-1].must_be_nil
+    end
+
+    it "gets the value at index 0" do
       subject[0].must_be_nil
     end
 
-    it "gets index 1" do
+    it "gets the value at index 1" do
       subject[1].must_be_nil
     end
 
-    it "gets index 2" do
+    it "gets the value at index 2" do
       subject[2].must_be_nil
     end
 
-    it "reads last" do
-      subject.last.must_be_nil
+    it "sets the value at index -1" do
+      subject[-1] = 42
+      subject[-1].must_be_nil
     end
 
-    it "pushes an item" do
-      subject.push(42).must_equal 1
-      subject.size.must_equal 1
-      subject.last.must_equal 42
+    it "sets the value at index 0" do
+      subject[0] = 42
+      subject[0].must_be_nil
+    end
+
+    it "sets the value at index 1" do
+      subject[1] = 42
+      subject[1].must_be_nil
+    end
+
+    it "sets the value at index 2" do
+      subject[2] = 42
+      subject[2].must_be_nil
+    end
+
+    it "converts to an Array" do
+      subject.to_a.must_equal []
+    end
+
+    it "converts to a String" do
+      subject.to_s.must_equal "()"
     end
   end
 
   #############################################################################
 
   describe "given a List with 1 item" do
-    subject { List.new(1) }
+    subject { List.new("R") }
+
+    it "has the correct size" do
+      subject.size.must_equal 1
+    end
 
     it "is not empty" do
       subject.wont_be_empty
     end
 
-    it "reads first" do
-      subject.first.must_equal 1
+    it "has the correct first" do
+      subject.first.must_equal "R"
     end
 
-    it "reads size" do
-      subject.size.must_equal 1
+    it "has the correct last" do
+      subject.last.must_equal "R"
     end
 
     it "shifts an item" do
-      subject.shift(2).must_equal 2
+      subject.shift(42).must_equal 2
       subject.size.must_equal 2
+      subject.first.must_equal 42
+      subject.last.must_equal "R"
     end
 
     it "unshifts all items" do
-      subject.unshift.must_equal 1
+      subject.unshift.must_equal "R"
       subject.unshift.must_be_nil
       subject.size.must_equal 0
 
@@ -103,74 +142,108 @@ EOS
       ObjectSpace.each_object(Node).count.must_equal 0
     end
 
-    it "converts to a String" do
-      subject.to_s.must_equal "(1)"
+    it "pushes an item" do
+      subject.push(42).must_equal 2
+      subject.size.must_equal 2
+      subject.first.must_equal "R"
+      subject.last.must_equal 42
     end
 
-    it "inspects itself" do
-      subject.inspect.must_equal <<-EOS.chomp
-#<#{subject.class}:#{subject.object_id} @size=#{subject.size}, @head=#{subject.send(:head).inspect}, @next=#{subject.send(:next).inspect}>
-EOS
+    it "pops all items" do
+      subject.pop.must_equal "R"
+      subject.pop.must_be_nil
+      subject.size.must_equal 0
+
+      GC.start
+      ObjectSpace.each_object(Node).count.must_equal 0
     end
 
     it "converts to an enumerator" do
       enumerator = subject.each
-      enumerator.next.must_equal 1
+      enumerator.next.must_equal "R"
       proc { enumerator.next }.must_raise(StopIteration)
     end
 
-    it "maps each item" do
-      subject.map { |node| node }.must_equal [1]
+    it "maps each value" do
+      subject.map { |value| value }.must_equal ["R"]
     end
 
-    it "gets index 0" do
-      subject[0].must_equal 1
+    it "gets the value at index -1" do
+      subject[-1].must_be_nil
     end
 
-    it "gets index 1" do
+    it "gets the value at index 0" do
+      subject[0].must_equal "R"
+    end
+
+    it "gets the value at index 1" do
       subject[1].must_be_nil
     end
 
-    it "gets index 2" do
+    it "gets the value at index 2" do
       subject[2].must_be_nil
     end
 
-    it "reads last" do
-      subject.last.must_equal 1
+    it "sets the value at index -1" do
+      subject[-1] = 42
+      subject[-1].must_be_nil
     end
 
-    it "pushes an item" do
-      subject.push(42).must_equal 2
-      subject.size.must_equal 2
-      subject.last.must_equal 42
+    it "sets the value at index 0" do
+      subject[0] = 42
+      subject[0].must_equal 42
+    end
+
+    it "sets the value at index 1" do
+      subject[1] = 42
+      subject[1].must_be_nil
+    end
+
+    it "sets the value at index 2" do
+      subject[2] = 42
+      subject[2].must_be_nil
+    end
+
+    it "converts to an Array" do
+      subject.to_a.must_equal ["R"]
+    end
+
+    it "converts to a String" do
+      subject.to_s.must_equal '("R")'
     end
   end
 
   #############################################################################
 
   describe "given a List with 2 items" do
-    subject { List.new(1, 2) }
+    subject { List.new("R", :S) }
+
+    it "has the correct size" do
+      subject.size.must_equal 2
+    end
 
     it "is not empty" do
       subject.wont_be_empty
     end
 
-    it "reads first" do
-      subject.first.must_equal 1
+    it "has the correct first" do
+      subject.first.must_equal "R"
     end
 
-    it "reads size" do
-      subject.size.must_equal 2
+    it "has the correct last" do
+      subject.last.must_equal :S
     end
 
     it "shifts an item" do
-      subject.shift(3).must_equal 3
+      subject.shift(42).must_equal 3
       subject.size.must_equal 3
+      subject.first.must_equal 42
+      subject.last.must_equal :S
     end
 
     it "unshifts all items" do
-      subject.unshift.must_equal 1
-      subject.unshift.must_equal 2
+      subject.unshift.must_equal "R"
+      subject.unshift.must_equal :S
       subject.unshift.must_be_nil
       subject.size.must_equal 0
 
@@ -178,76 +251,111 @@ EOS
       ObjectSpace.each_object(Node).count.must_equal 0
     end
 
-    it "converts to a String" do
-      subject.to_s.must_equal "(1 (2))"
+    it "pushes an item" do
+      subject.push(42).must_equal 3
+      subject.size.must_equal 3
+      subject.first.must_equal "R"
+      subject.last.must_equal 42
     end
 
-    it "inspects itself" do
-      subject.inspect.must_equal <<-EOS.chomp
-#<#{subject.class}:#{subject.object_id} @size=#{subject.size}, @head=#{subject.send(:head).inspect}, @next=#{subject.send(:next).inspect}>
-EOS
+    it "pops all items" do
+      subject.pop.must_equal :S
+      subject.pop.must_equal "R"
+      subject.pop.must_be_nil
+      subject.size.must_equal 0
+
+      GC.start
+      ObjectSpace.each_object(Node).count.must_equal 0
     end
 
     it "converts to an enumerator" do
       enumerator = subject.each
-      enumerator.next.must_equal 1
-      enumerator.next.must_equal 2
+      enumerator.next.must_equal "R"
+      enumerator.next.must_equal :S
       proc { enumerator.next }.must_raise(StopIteration)
     end
 
-    it "maps each node" do
-      subject.map { |node| node }.must_equal [1, 2]
+    it "maps each value" do
+      subject.map { |value| value }.must_equal ["R", :S]
     end
 
-    it "gets index 0" do
-      subject[0].must_equal 1
+    it "gets the value at index -1" do
+      subject[-1].must_be_nil
     end
 
-    it "gets index 1" do
-      subject[1].must_equal 2
+    it "gets the value at index 0" do
+      subject[0].must_equal "R"
     end
 
-    it "gets index 2" do
+    it "gets the value at index 1" do
+      subject[1].must_equal :S
+    end
+
+    it "gets the value at index 2" do
       subject[2].must_be_nil
     end
 
-    it "reads last" do
-      subject.last.must_equal 2
+    it "sets the value at index -1" do
+      subject[-1] = 42
+      subject[-1].must_be_nil
     end
 
-    it "pushes an item" do
-      subject.push(42).must_equal 3
-      subject.size.must_equal 3
-      subject.last.must_equal 42
+    it "sets the value at index 0" do
+      subject[0] = 42
+      subject[0].must_equal 42
+    end
+
+    it "sets the value at index 1" do
+      subject[1] = 42
+      subject[1].must_equal 42
+    end
+
+    it "sets the value at index 2" do
+      subject[2] = 42
+      subject[2].must_be_nil
+    end
+
+    it "converts to an Array" do
+      subject.to_a.must_equal ["R", :S]
+    end
+
+    it "converts to a String" do
+      subject.to_s.must_equal '("R", :S)'
     end
   end
 
   #############################################################################
 
   describe "given a List with 3 items" do
-    subject { List.new(1, 2, 3) }
+    subject { List.new("R", :S, 31) }
+
+    it "has the correct size" do
+      subject.size.must_equal 3
+    end
 
     it "is not empty" do
       subject.wont_be_empty
     end
 
-    it "reads first" do
-      subject.first.must_equal 1
+    it "has the correct first" do
+      subject.first.must_equal "R"
     end
 
-    it "reads size" do
-      subject.size.must_equal 3
+    it "has the correct last" do
+      subject.last.must_equal 31
     end
 
     it "shifts an item" do
-      subject.shift(4).must_equal 4
+      subject.shift(42).must_equal 4
       subject.size.must_equal 4
+      subject.first.must_equal 42
+      subject.last.must_equal 31
     end
 
     it "unshifts all items" do
-      subject.unshift.must_equal 1
-      subject.unshift.must_equal 2
-      subject.unshift.must_equal 3
+      subject.unshift.must_equal "R"
+      subject.unshift.must_equal :S
+      subject.unshift.must_equal 31
       subject.unshift.must_be_nil
       subject.size.must_equal 0
 
@@ -255,42 +363,78 @@ EOS
       ObjectSpace.each_object(Node).count.must_equal 0
     end
 
-    it "converts to a String" do
-      subject.to_s.must_equal "(1 (2 (3)))"
+    it "pushes an item" do
+      subject.push(42).must_equal 4
+      subject.size.must_equal 4
+      subject.first.must_equal "R"
+      subject.last.must_equal 42
+    end
+
+    it "pops all items" do
+      subject.pop.must_equal 31
+      subject.pop.must_equal :S
+      subject.pop.must_equal "R"
+      subject.pop.must_be_nil
+      subject.size.must_equal 0
+
+      GC.start
+      ObjectSpace.each_object(Node).count.must_equal 0
     end
 
     it "converts to an enumerator" do
       enumerator = subject.each
-      enumerator.next.must_equal 1
-      enumerator.next.must_equal 2
-      enumerator.next.must_equal 3
+      enumerator.next.must_equal "R"
+      enumerator.next.must_equal :S
+      enumerator.next.must_equal 31
       proc { enumerator.next }.must_raise(StopIteration)
     end
 
-    it "maps each node" do
-      subject.map { |node| node }.must_equal [1, 2, 3]
+    it "maps each value" do
+      subject.map { |value| value }.must_equal ["R", :S, 31]
     end
 
-    it "gets index 0" do
-      subject[0].must_equal 1
+    it "gets the value at index -1" do
+      subject[-1].must_be_nil
     end
 
-    it "gets index 1" do
-      subject[1].must_equal 2
+    it "gets the value at index 0" do
+      subject[0].must_equal "R"
     end
 
-    it "gets index 2" do
-      subject[2].must_equal 3
+    it "gets the value at index 1" do
+      subject[1].must_equal :S
     end
 
-    it "reads last" do
-      subject.last.must_equal 3
+    it "gets the value at index 2" do
+      subject[2].must_equal 31
     end
 
-    it "pushes an item" do
-      subject.push(42).must_equal 4
-      subject.size.must_equal 4
-      subject.last.must_equal 42
+    it "sets the value at index -1" do
+      subject[-1] = 42
+      subject[-1].must_be_nil
+    end
+
+    it "sets the value at index 0" do
+      subject[0] = 42
+      subject[0].must_equal 42
+    end
+
+    it "sets the value at index 1" do
+      subject[1] = 42
+      subject[1].must_equal 42
+    end
+
+    it "sets the value at index 2" do
+      subject[2] = 42
+      subject[2].must_equal 42
+    end
+
+    it "converts to an Array" do
+      subject.to_a.must_equal ["R", :S, 31]
+    end
+
+    it "converts to a String" do
+      subject.to_s.must_equal '("R", :S, 31)'
     end
   end
 end
