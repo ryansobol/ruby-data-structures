@@ -33,7 +33,7 @@ describe LinkedList do
       subject.size.must_equal 0
 
       GC.start
-      ObjectSpace.each_object(Node).count.must_equal 0
+      ObjectSpace.each_object(LinkedList::Node).count.must_equal 0
     end
 
     it "pushes an item" do
@@ -48,7 +48,7 @@ describe LinkedList do
       subject.size.must_equal 0
 
       GC.start
-      ObjectSpace.each_object(Node).count.must_equal 0
+      ObjectSpace.each_object(LinkedList::Node).count.must_equal 0
     end
 
     it "converts to an enumerator" do
@@ -139,7 +139,7 @@ describe LinkedList do
       subject.size.must_equal 0
 
       GC.start
-      ObjectSpace.each_object(Node).count.must_equal 0
+      ObjectSpace.each_object(LinkedList::Node).count.must_equal 0
     end
 
     it "pushes an item" do
@@ -155,7 +155,7 @@ describe LinkedList do
       subject.size.must_equal 0
 
       GC.start
-      ObjectSpace.each_object(Node).count.must_equal 0
+      ObjectSpace.each_object(LinkedList::Node).count.must_equal 0
     end
 
     it "converts to an enumerator" do
@@ -248,7 +248,7 @@ describe LinkedList do
       subject.size.must_equal 0
 
       GC.start
-      ObjectSpace.each_object(Node).count.must_equal 0
+      ObjectSpace.each_object(LinkedList::Node).count.must_equal 0
     end
 
     it "pushes an item" do
@@ -265,7 +265,7 @@ describe LinkedList do
       subject.size.must_equal 0
 
       GC.start
-      ObjectSpace.each_object(Node).count.must_equal 0
+      ObjectSpace.each_object(LinkedList::Node).count.must_equal 0
     end
 
     it "converts to an enumerator" do
@@ -360,7 +360,7 @@ describe LinkedList do
       subject.size.must_equal 0
 
       GC.start
-      ObjectSpace.each_object(Node).count.must_equal 0
+      ObjectSpace.each_object(LinkedList::Node).count.must_equal 0
     end
 
     it "pushes an item" do
@@ -378,7 +378,7 @@ describe LinkedList do
       subject.size.must_equal 0
 
       GC.start
-      ObjectSpace.each_object(Node).count.must_equal 0
+      ObjectSpace.each_object(LinkedList::Node).count.must_equal 0
     end
 
     it "converts to an enumerator" do
