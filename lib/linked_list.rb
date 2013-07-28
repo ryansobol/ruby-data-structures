@@ -1,6 +1,6 @@
 require_relative "node"
 
-class List
+class LinkedList
   include Enumerable
 
   # O(n)

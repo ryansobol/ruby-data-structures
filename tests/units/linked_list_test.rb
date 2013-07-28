@@ -1,9 +1,9 @@
-require "../../lib/list"
+require "../../lib/linked_list"
 require "../test_helper"
 
-describe List do
-  describe "given a empty List" do
-    subject { List.new }
+describe LinkedList do
+  describe "given a empty LinkedList" do
+    subject { LinkedList.new }
 
     it "has the correct size" do
       subject.size.must_equal 0
@@ -107,8 +107,8 @@ describe List do
 
   #############################################################################
 
-  describe "given a List with 1 item" do
-    subject { List.new("R") }
+  describe "given a LinkedList with 1 item" do
+    subject { LinkedList.new("R") }
 
     it "has the correct size" do
       subject.size.must_equal 1
@@ -215,8 +215,8 @@ describe List do
 
   #############################################################################
 
-  describe "given a List with 2 items" do
-    subject { List.new("R", :S) }
+  describe "given a LinkedList with 2 items" do
+    subject { LinkedList.new("R", :S) }
 
     it "has the correct size" do
       subject.size.must_equal 2
@@ -326,8 +326,8 @@ describe List do
 
   #############################################################################
 
-  describe "given a List with 3 items" do
-    subject { List.new("R", :S, 31) }
+  describe "given a LinkedList with 3 items" do
+    subject { LinkedList.new("R", :S, 31) }
 
     it "has the correct size" do
       subject.size.must_equal 3
