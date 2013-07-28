@@ -51,6 +51,16 @@ describe LinkedList do
       ObjectSpace.each_object(LinkedList::Node).count.must_equal 0
     end
 
+    it "clears" do
+      subject.clear.must_equal 0
+      subject.size.must_equal 0
+      subject.first.must_be_nil
+      subject.last.must_be_nil
+
+      GC.start
+      ObjectSpace.each_object(LinkedList::Node).count.must_equal 0
+    end
+
     it "converts to an enumerator" do
       enumerator = subject.each
       proc { enumerator.next }.must_raise(StopIteration)
@@ -153,6 +163,16 @@ describe LinkedList do
       subject.pop.must_equal "R"
       subject.pop.must_be_nil
       subject.size.must_equal 0
+
+      GC.start
+      ObjectSpace.each_object(LinkedList::Node).count.must_equal 0
+    end
+
+    it "clears" do
+      subject.clear.must_equal 0
+      subject.size.must_equal 0
+      subject.first.must_be_nil
+      subject.last.must_be_nil
 
       GC.start
       ObjectSpace.each_object(LinkedList::Node).count.must_equal 0
@@ -268,6 +288,16 @@ describe LinkedList do
       ObjectSpace.each_object(LinkedList::Node).count.must_equal 0
     end
 
+    it "clears" do
+      subject.clear.must_equal 0
+      subject.size.must_equal 0
+      subject.first.must_be_nil
+      subject.last.must_be_nil
+
+      GC.start
+      ObjectSpace.each_object(LinkedList::Node).count.must_equal 0
+    end
+
     it "converts to an enumerator" do
       enumerator = subject.each
       enumerator.next.must_equal "R"
@@ -376,6 +406,16 @@ describe LinkedList do
       subject.pop.must_equal "R"
       subject.pop.must_be_nil
       subject.size.must_equal 0
+
+      GC.start
+      ObjectSpace.each_object(LinkedList::Node).count.must_equal 0
+    end
+
+    it "clears" do
+      subject.clear.must_equal 0
+      subject.size.must_equal 0
+      subject.first.must_be_nil
+      subject.last.must_be_nil
 
       GC.start
       ObjectSpace.each_object(LinkedList::Node).count.must_equal 0

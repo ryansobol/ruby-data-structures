@@ -107,6 +107,22 @@ class LinkedList
   #################################################################################################
 
   # O(n)
+  def clear
+    current = head
+
+    while current
+      nexxt = current.next
+      current.clear
+      current = nexxt
+    end
+
+    @head = @tail = nil
+    @size = 0
+  end
+
+  #################################################################################################
+
+  # O(n)
   def each_node
     current = head
 
