@@ -13,15 +13,6 @@ class Node
   attr_reader :prev, :next
 
   # O(1)
-  def next=(nexxt)
-    unless nexxt.nil? || nexxt.is_a?(self.class)
-      raise "next must be nil or a #{self.class} instance"
-    end
-
-    @next = nexxt
-  end
-
-  # O(1)
   def prev=(prevv)
     unless prevv.nil? || prevv.is_a?(self.class)
       raise "prev must be nil or a #{self.class} instance"
@@ -31,9 +22,18 @@ class Node
   end
 
   # O(1)
+  def next=(nexxt)
+    unless nexxt.nil? || nexxt.is_a?(self.class)
+      raise "next must be nil or a #{self.class} instance"
+    end
+
+    @next = nexxt
+  end
+
+  # O(1)
   def clear
     temp = value
-    self.value = self.next = self.prev = nil
+    self.value = self.prev = self.next = nil
     temp
   end
 
