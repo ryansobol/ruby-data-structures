@@ -166,6 +166,9 @@ describe LinkedList do
       subject.size.must_equal 0
       subject[-1].must_be_nil
       subject.to_a.must_equal []
+
+      GC.start
+      ObjectSpace.each_object(LinkedList::Node).count.must_equal 0
     end
 
     it "deletes the value at index 0" do
@@ -173,6 +176,9 @@ describe LinkedList do
       subject.size.must_equal 0
       subject[0].must_be_nil
       subject.to_a.must_equal []
+
+      GC.start
+      ObjectSpace.each_object(LinkedList::Node).count.must_equal 0
     end
 
     it "deletes the value at index 1" do
@@ -180,6 +186,9 @@ describe LinkedList do
       subject.size.must_equal 0
       subject[1].must_be_nil
       subject.to_a.must_equal []
+
+      GC.start
+      ObjectSpace.each_object(LinkedList::Node).count.must_equal 0
     end
 
     it "deletes the value at index 2" do
@@ -187,6 +196,9 @@ describe LinkedList do
       subject.size.must_equal 0
       subject[2].must_be_nil
       subject.to_a.must_equal []
+
+      GC.start
+      ObjectSpace.each_object(LinkedList::Node).count.must_equal 0
     end
 
     it "deletes the value at index 3" do
@@ -194,6 +206,9 @@ describe LinkedList do
       subject.size.must_equal 0
       subject[3].must_be_nil
       subject.to_a.must_equal []
+
+      GC.start
+      ObjectSpace.each_object(LinkedList::Node).count.must_equal 0
     end
   end
 
@@ -366,6 +381,9 @@ describe LinkedList do
       subject.size.must_equal 1
       subject[-1].must_be_nil
       subject.to_a.must_equal ["R"]
+
+      GC.start
+      ObjectSpace.each_object(LinkedList::Node).count.must_equal 1
     end
 
     it "deletes the value at index 0" do
@@ -373,6 +391,9 @@ describe LinkedList do
       subject.size.must_equal 0
       subject[0].must_be_nil
       subject.to_a.must_equal []
+
+      GC.start
+      ObjectSpace.each_object(LinkedList::Node).count.must_equal 0
     end
 
     it "deletes the value at index 1" do
@@ -380,6 +401,9 @@ describe LinkedList do
       subject.size.must_equal 1
       subject[1].must_be_nil
       subject.to_a.must_equal ["R"]
+
+      GC.start
+      ObjectSpace.each_object(LinkedList::Node).count.must_equal 1
     end
 
     it "deletes the value at index 2" do
@@ -387,6 +411,9 @@ describe LinkedList do
       subject.size.must_equal 1
       subject[2].must_be_nil
       subject.to_a.must_equal ["R"]
+
+      GC.start
+      ObjectSpace.each_object(LinkedList::Node).count.must_equal 1
     end
 
     it "deletes the value at index 3" do
@@ -394,6 +421,9 @@ describe LinkedList do
       subject.size.must_equal 1
       subject[3].must_be_nil
       subject.to_a.must_equal ["R"]
+
+      GC.start
+      ObjectSpace.each_object(LinkedList::Node).count.must_equal 1
     end
   end
 
@@ -569,6 +599,9 @@ describe LinkedList do
       subject.size.must_equal 2
       subject[-1].must_be_nil
       subject.to_a.must_equal ["R", :S]
+
+      GC.start
+      ObjectSpace.each_object(LinkedList::Node).count.must_equal 2
     end
 
     it "deletes the value at index 0" do
@@ -576,6 +609,9 @@ describe LinkedList do
       subject.size.must_equal 1
       subject[0].must_equal :S
       subject.to_a.must_equal [:S]
+
+      GC.start
+      ObjectSpace.each_object(LinkedList::Node).count.must_equal 1
     end
 
     it "deletes the value at index 1" do
@@ -583,6 +619,9 @@ describe LinkedList do
       subject.size.must_equal 1
       subject[1].must_be_nil
       subject.to_a.must_equal ["R"]
+
+      GC.start
+      ObjectSpace.each_object(LinkedList::Node).count.must_equal 1
     end
 
     it "deletes the value at index 2" do
@@ -590,6 +629,9 @@ describe LinkedList do
       subject.size.must_equal 2
       subject[2].must_be_nil
       subject.to_a.must_equal ["R", :S]
+
+      GC.start
+      ObjectSpace.each_object(LinkedList::Node).count.must_equal 2
     end
 
     it "deletes the value at index 3" do
@@ -597,6 +639,9 @@ describe LinkedList do
       subject.size.must_equal 2
       subject[3].must_be_nil
       subject.to_a.must_equal ["R", :S]
+
+      GC.start
+      ObjectSpace.each_object(LinkedList::Node).count.must_equal 2
     end
   end
 
@@ -775,6 +820,9 @@ describe LinkedList do
       subject.size.must_equal 3
       subject[-1].must_be_nil
       subject.to_a.must_equal ["R", :S, 31]
+
+      GC.start
+      ObjectSpace.each_object(LinkedList::Node).count.must_equal 3
     end
 
     it "deletes the value at index 0" do
@@ -782,6 +830,9 @@ describe LinkedList do
       subject.size.must_equal 2
       subject[0].must_equal :S
       subject.to_a.must_equal [:S, 31]
+
+      GC.start
+      ObjectSpace.each_object(LinkedList::Node).count.must_equal 2
     end
 
     it "deletes the value at index 1" do
@@ -789,6 +840,9 @@ describe LinkedList do
       subject.size.must_equal 2
       subject[1].must_equal 31
       subject.to_a.must_equal ["R", 31]
+
+      GC.start
+      ObjectSpace.each_object(LinkedList::Node).count.must_equal 2
     end
 
     it "deletes the value at index 2" do
@@ -796,6 +850,9 @@ describe LinkedList do
       subject.size.must_equal 2
       subject[2].must_be_nil
       subject.to_a.must_equal ["R", :S]
+
+      GC.start
+      ObjectSpace.each_object(LinkedList::Node).count.must_equal 2
     end
 
     it "deletes the value at index 3" do
@@ -803,6 +860,9 @@ describe LinkedList do
       subject.size.must_equal 3
       subject[3].must_be_nil
       subject.to_a.must_equal ["R", :S, 31]
+
+      GC.start
+      ObjectSpace.each_object(LinkedList::Node).count.must_equal 3
     end
   end
 end
