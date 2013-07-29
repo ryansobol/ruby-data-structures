@@ -61,6 +61,14 @@ describe LinkedList do
       ObjectSpace.each_object(LinkedList::Node).count.must_equal 0
     end
 
+    it "converts to an Array" do
+      subject.to_a.must_equal []
+    end
+
+    it "converts to a String" do
+      subject.to_s.must_equal "()"
+    end
+
     it "converts to an enumerator" do
       enumerator = subject.each
       proc { enumerator.next }.must_raise(StopIteration)
@@ -68,6 +76,18 @@ describe LinkedList do
 
     it "maps each value" do
       subject.map { |value| value }.must_equal []
+    end
+
+    it "has the correct index for value 'R'" do
+      subject.index("R").must_be_nil
+    end
+
+    it "has the correct index for value :S" do
+      subject.index(:S).must_be_nil
+    end
+
+    it "has the correct index for value 31" do
+      subject.index(31).must_be_nil
     end
 
     it "gets the value at index -1" do
@@ -106,12 +126,74 @@ describe LinkedList do
       subject[2].must_be_nil
     end
 
-    it "converts to an Array" do
+    it "inserts a value at index -1" do
+      subject.insert(-1, 42).must_be_nil
+      subject.size.must_equal 0
+      subject[-1].must_be_nil
       subject.to_a.must_equal []
     end
 
-    it "converts to a String" do
-      subject.to_s.must_equal "()"
+    it "inserts a value at index 0" do
+      subject.insert(0, 42).must_equal 1
+      subject.size.must_equal 1
+      subject[0].must_equal 42
+      subject.to_a.must_equal [42]
+    end
+
+    it "inserts a value at index 1" do
+      subject.insert(1, 42).must_be_nil
+      subject.size.must_equal 0
+      subject[1].must_be_nil
+      subject.to_a.must_equal []
+    end
+
+    it "inserts a value at index 2" do
+      subject.insert(2, 42).must_be_nil
+      subject.size.must_equal 0
+      subject[2].must_be_nil
+      subject.to_a.must_equal []
+    end
+
+    it "inserts a value at index 3" do
+      subject.insert(3, 42).must_be_nil
+      subject.size.must_equal 0
+      subject[3].must_be_nil
+      subject.to_a.must_equal []
+    end
+
+    it "deletes the value at index -1" do
+      subject.delete(-1).must_be_nil
+      subject.size.must_equal 0
+      subject[-1].must_be_nil
+      subject.to_a.must_equal []
+    end
+
+    it "deletes the value at index 0" do
+      subject.delete(0).must_be_nil
+      subject.size.must_equal 0
+      subject[0].must_be_nil
+      subject.to_a.must_equal []
+    end
+
+    it "deletes the value at index 1" do
+      subject.delete(1).must_be_nil
+      subject.size.must_equal 0
+      subject[1].must_be_nil
+      subject.to_a.must_equal []
+    end
+
+    it "deletes the value at index 2" do
+      subject.delete(2).must_be_nil
+      subject.size.must_equal 0
+      subject[2].must_be_nil
+      subject.to_a.must_equal []
+    end
+
+    it "deletes the value at index 3" do
+      subject.delete(3).must_be_nil
+      subject.size.must_equal 0
+      subject[3].must_be_nil
+      subject.to_a.must_equal []
     end
   end
 
@@ -178,6 +260,14 @@ describe LinkedList do
       ObjectSpace.each_object(LinkedList::Node).count.must_equal 0
     end
 
+    it "converts to an Array" do
+      subject.to_a.must_equal ["R"]
+    end
+
+    it "converts to a String" do
+      subject.to_s.must_equal '("R")'
+    end
+
     it "converts to an enumerator" do
       enumerator = subject.each
       enumerator.next.must_equal "R"
@@ -186,6 +276,18 @@ describe LinkedList do
 
     it "maps each value" do
       subject.map { |value| value }.must_equal ["R"]
+    end
+
+    it "has the correct index for value 'R'" do
+      subject.index("R").must_equal 0
+    end
+
+    it "has the correct index for value :S" do
+      subject.index(:S).must_be_nil
+    end
+
+    it "has the correct index for value 31" do
+      subject.index(31).must_be_nil
     end
 
     it "gets the value at index -1" do
@@ -224,12 +326,74 @@ describe LinkedList do
       subject[2].must_be_nil
     end
 
-    it "converts to an Array" do
+    it "inserts a value at index -1" do
+      subject.insert(-1, 42).must_be_nil
+      subject.size.must_equal 1
+      subject[-1].must_be_nil
       subject.to_a.must_equal ["R"]
     end
 
-    it "converts to a String" do
-      subject.to_s.must_equal '("R")'
+    it "inserts a value at index 0" do
+      subject.insert(0, 42).must_equal 2
+      subject.size.must_equal 2
+      subject[0].must_equal 42
+      subject.to_a.must_equal [42, "R"]
+    end
+
+    it "inserts a value at index 1" do
+      subject.insert(1, 42).must_equal 2
+      subject.size.must_equal 2
+      subject[1].must_equal 42
+      subject.to_a.must_equal ["R", 42]
+    end
+
+    it "inserts a value at index 2" do
+      subject.insert(2, 42).must_be_nil
+      subject.size.must_equal 1
+      subject[2].must_be_nil
+      subject.to_a.must_equal ["R"]
+    end
+
+    it "inserts a value at index 3" do
+      subject.insert(3, 42).must_be_nil
+      subject.size.must_equal 1
+      subject[3].must_be_nil
+      subject.to_a.must_equal ["R"]
+    end
+
+    it "deletes the value at index -1" do
+      subject.delete(-1).must_be_nil
+      subject.size.must_equal 1
+      subject[-1].must_be_nil
+      subject.to_a.must_equal ["R"]
+    end
+
+    it "deletes the value at index 0" do
+      subject.delete(0).must_equal "R"
+      subject.size.must_equal 0
+      subject[0].must_be_nil
+      subject.to_a.must_equal []
+    end
+
+    it "deletes the value at index 1" do
+      subject.delete(1).must_be_nil
+      subject.size.must_equal 1
+      subject[1].must_be_nil
+      subject.to_a.must_equal ["R"]
+    end
+
+    it "deletes the value at index 2" do
+      subject.delete(2).must_be_nil
+      subject.size.must_equal 1
+      subject[2].must_be_nil
+      subject.to_a.must_equal ["R"]
+    end
+
+    it "deletes the value at index 3" do
+      subject.delete(3).must_be_nil
+      subject.size.must_equal 1
+      subject[3].must_be_nil
+      subject.to_a.must_equal ["R"]
     end
   end
 
@@ -298,6 +462,14 @@ describe LinkedList do
       ObjectSpace.each_object(LinkedList::Node).count.must_equal 0
     end
 
+    it "converts to an Array" do
+      subject.to_a.must_equal ["R", :S]
+    end
+
+    it "converts to a String" do
+      subject.to_s.must_equal '("R", :S)'
+    end
+
     it "converts to an enumerator" do
       enumerator = subject.each
       enumerator.next.must_equal "R"
@@ -307,6 +479,18 @@ describe LinkedList do
 
     it "maps each value" do
       subject.map { |value| value }.must_equal ["R", :S]
+    end
+
+    it "has the correct index for value 'R'" do
+      subject.index("R").must_equal 0
+    end
+
+    it "has the correct index for value :S" do
+      subject.index(:S).must_equal 1
+    end
+
+    it "has the correct index for value 31" do
+      subject.index(31).must_be_nil
     end
 
     it "gets the value at index -1" do
@@ -345,12 +529,74 @@ describe LinkedList do
       subject[2].must_be_nil
     end
 
-    it "converts to an Array" do
+    it "inserts a value at index -1" do
+      subject.insert(-1, 42).must_be_nil
+      subject.size.must_equal 2
+      subject[-1].must_be_nil
       subject.to_a.must_equal ["R", :S]
     end
 
-    it "converts to a String" do
-      subject.to_s.must_equal '("R", :S)'
+    it "inserts a value at index 0" do
+      subject.insert(0, 42).must_equal 3
+      subject.size.must_equal 3
+      subject[0].must_equal 42
+      subject.to_a.must_equal [42, "R", :S]
+    end
+
+    it "inserts a value at index 1" do
+      subject.insert(1, 42).must_equal 3
+      subject.size.must_equal 3
+      subject[1].must_equal 42
+      subject.to_a.must_equal ["R", 42, :S]
+    end
+
+    it "inserts a value at index 2" do
+      subject.insert(2, 42).must_equal 3
+      subject.size.must_equal 3
+      subject[2].must_equal 42
+      subject.to_a.must_equal ["R", :S, 42]
+    end
+
+    it "inserts a value at index 3" do
+      subject.insert(3, 42).must_be_nil
+      subject.size.must_equal 2
+      subject[3].must_be_nil
+      subject.to_a.must_equal ["R", :S]
+    end
+
+    it "deletes the value at index -1" do
+      subject.delete(-1).must_be_nil
+      subject.size.must_equal 2
+      subject[-1].must_be_nil
+      subject.to_a.must_equal ["R", :S]
+    end
+
+    it "deletes the value at index 0" do
+      subject.delete(0).must_equal "R"
+      subject.size.must_equal 1
+      subject[0].must_equal :S
+      subject.to_a.must_equal [:S]
+    end
+
+    it "deletes the value at index 1" do
+      subject.delete(1).must_equal :S
+      subject.size.must_equal 1
+      subject[1].must_be_nil
+      subject.to_a.must_equal ["R"]
+    end
+
+    it "deletes the value at index 2" do
+      subject.delete(2).must_be_nil
+      subject.size.must_equal 2
+      subject[2].must_be_nil
+      subject.to_a.must_equal ["R", :S]
+    end
+
+    it "deletes the value at index 3" do
+      subject.delete(3).must_be_nil
+      subject.size.must_equal 2
+      subject[3].must_be_nil
+      subject.to_a.must_equal ["R", :S]
     end
   end
 
@@ -421,6 +667,14 @@ describe LinkedList do
       ObjectSpace.each_object(LinkedList::Node).count.must_equal 0
     end
 
+    it "converts to an Array" do
+      subject.to_a.must_equal ["R", :S, 31]
+    end
+
+    it "converts to a String" do
+      subject.to_s.must_equal '("R", :S, 31)'
+    end
+
     it "converts to an enumerator" do
       enumerator = subject.each
       enumerator.next.must_equal "R"
@@ -431,6 +685,18 @@ describe LinkedList do
 
     it "maps each value" do
       subject.map { |value| value }.must_equal ["R", :S, 31]
+    end
+
+    it "has the correct index for value 'R'" do
+      subject.index("R").must_equal 0
+    end
+
+    it "has the correct index for value :S" do
+      subject.index(:S).must_equal 1
+    end
+
+    it "has the correct index for value 31" do
+      subject.index(31).must_equal 2
     end
 
     it "gets the value at index -1" do
@@ -469,12 +735,74 @@ describe LinkedList do
       subject[2].must_equal 42
     end
 
-    it "converts to an Array" do
+    it "inserts a value at index -1" do
+      subject.insert(-1, 42).must_be_nil
+      subject.size.must_equal 3
+      subject[-1].must_be_nil
       subject.to_a.must_equal ["R", :S, 31]
     end
 
-    it "converts to a String" do
-      subject.to_s.must_equal '("R", :S, 31)'
+    it "inserts a value at index 0" do
+      subject.insert(0, 42).must_equal 4
+      subject.size.must_equal 4
+      subject[0].must_equal 42
+      subject.to_a.must_equal [42, "R", :S, 31]
+    end
+
+    it "inserts a value at index 1" do
+      subject.insert(1, 42).must_equal 4
+      subject.size.must_equal 4
+      subject[1].must_equal 42
+      subject.to_a.must_equal ["R", 42, :S, 31]
+    end
+
+    it "inserts a value at index 2" do
+      subject.insert(2, 42).must_equal 4
+      subject.size.must_equal 4
+      subject[2].must_equal 42
+      subject.to_a.must_equal ["R", :S, 42, 31]
+    end
+
+    it "inserts a value at index 3" do
+      subject.insert(3, 42).must_equal 4
+      subject.size.must_equal 4
+      subject[3].must_equal 42
+      subject.to_a.must_equal ["R", :S, 31, 42]
+    end
+
+    it "deletes the value at index -1" do
+      subject.delete(-1).must_be_nil
+      subject.size.must_equal 3
+      subject[-1].must_be_nil
+      subject.to_a.must_equal ["R", :S, 31]
+    end
+
+    it "deletes the value at index 0" do
+      subject.delete(0).must_equal "R"
+      subject.size.must_equal 2
+      subject[0].must_equal :S
+      subject.to_a.must_equal [:S, 31]
+    end
+
+    it "deletes the value at index 1" do
+      subject.delete(1).must_equal :S
+      subject.size.must_equal 2
+      subject[1].must_equal 31
+      subject.to_a.must_equal ["R", 31]
+    end
+
+    it "deletes the value at index 2" do
+      subject.delete(2).must_equal 31
+      subject.size.must_equal 2
+      subject[2].must_be_nil
+      subject.to_a.must_equal ["R", :S]
+    end
+
+    it "deletes the value at index 3" do
+      subject.delete(3).must_be_nil
+      subject.size.must_equal 3
+      subject[3].must_be_nil
+      subject.to_a.must_equal ["R", :S, 31]
     end
   end
 end

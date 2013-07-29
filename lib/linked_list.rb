@@ -123,6 +123,27 @@ class LinkedList
   #################################################################################################
 
   # O(n)
+  def to_a
+    map { |value| value }
+  end
+
+  # O(n)
+  def to_s
+    stop      = size - 1
+    output    = ""
+    seperator = ", "
+
+    each_with_index do |value, index|
+      output << value.inspect
+      output << seperator unless index == stop
+    end
+
+    "(#{output})"
+  end
+
+  #################################################################################################
+
+  # O(n)
   def each_node
     current = head
 
@@ -158,6 +179,11 @@ class LinkedList
   end
 
   # O(n)
+  def index(value)
+    each_node_with_index { |node, index| return index if node.value == value }
+  end
+
+  # O(n)
   def [](key)
     return if key < 0 || key >= size
 
@@ -178,21 +204,35 @@ class LinkedList
   #################################################################################################
 
   # O(n)
-  def to_a
-    map { |value| value }
+  def insert(key, value)
+    return nil          if key < 0 || key > size
+    return push(value)  if key == size
+    return shift(value) if key == 0
+
+    nexxt = each_node_with_index { |node, index| break node if key == index }
+    prevv = nexxt.prev
+
+    prevv.next = nexxt.prev = LinkedList::Node.new(value, prevv, nexxt)
+
+    @size += 1
   end
 
   # O(n)
-  def to_s
-    stop      = size - 1
-    output    = ""
-    seperator = ", "
+  def delete(key)
+    return nil      if key < 0 || key > size - 1
+    return pop      if key == size - 1
+    return unshift  if key == 0
 
-    each_with_index do |value, index|
-      output << value.inspect
-      output << seperator unless index == stop
-    end
+    @size -= 1
 
-    "(#{output})"
+    middle = each_node_with_index { |node, index| break node if key == index }
+
+    prevv = middle.prev
+    nexxt = middle.next
+
+    prevv.next = nexxt
+    nexxt.prev = prevv
+
+    middle.clear
   end
 end
