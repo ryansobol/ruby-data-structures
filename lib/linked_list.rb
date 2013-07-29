@@ -179,8 +179,8 @@ class LinkedList
   end
 
   # O(n)
-  def index(value)
-    each_node_with_index { |node, index| return index if node.value == value }
+  def index(needle)
+    each_node_with_index { |node, index| return index if node.value == needle }
   end
 
   # O(n)
