@@ -136,6 +136,9 @@ class LinkedList
 
   # O(n)
   def to_s
+    # O(2n)
+    # output = map { |value| value.to_inspect }.join(", ")
+
     stop      = size - 1
     output    = ""
     seperator = ", "
