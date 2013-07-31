@@ -1,8 +1,6 @@
 require_relative "linked_list/node"
 
 class LinkedList
-  include Enumerable
-
   # O(n)
   def initialize(*items)
     @size = 0
@@ -122,6 +120,15 @@ class LinkedList
 
   #################################################################################################
 
+  include Enumerable
+
+  # O(n)
+  def each
+    return to_enum(:each) unless block_given?
+
+    each_node { |node| yield node.value }
+  end
+
   # O(n)
   def to_a
     map { |value| value }
@@ -170,13 +177,6 @@ class LinkedList
   protected :each_node_with_index
 
   #################################################################################################
-
-  # O(n)
-  def each
-    return to_enum(:each) unless block_given?
-
-    each_node { |node| yield node.value }
-  end
 
   # O(n)
   def index(needle)
