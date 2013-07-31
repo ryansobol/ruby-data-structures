@@ -185,14 +185,18 @@ class LinkedList
 
   # O(n)
   def [](key)
-    return if key < 0 || key >= size
+    if key < 0 || key >= size
+      raise IndexError, "index #{key} out of bounds for #{self.class} of size #{size}"
+    end
 
     each_with_index { |value, index| return value if key == index }
   end
 
   # O(n)
   def []=(key, value)
-    return if key < 0 || key >= size
+    if key < 0 || key >= size
+      raise IndexError, "index #{key} out of bounds for #{self.class} of size #{size}"
+    end
 
     node = each_node_with_index do |node, index|
       break node if key == index
@@ -205,7 +209,10 @@ class LinkedList
 
   # O(n)
   def insert(key, value)
-    return nil          if key < 0 || key > size
+    if key < 0 || key > size
+      raise IndexError, "index #{key} out of bounds for #{self.class} of size #{size}"
+    end
+
     return push(value)  if key == size
     return shift(value) if key == 0
 
@@ -219,7 +226,10 @@ class LinkedList
 
   # O(n)
   def delete(key)
-    return nil      if key < 0 || key > size - 1
+    if key < 0 || key > size - 1
+      raise IndexError, "index #{key} out of bounds for #{self.class} of size #{size}"
+    end
+
     return pop      if key == size - 1
     return unshift  if key == 0
 

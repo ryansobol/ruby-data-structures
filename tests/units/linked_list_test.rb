@@ -82,54 +82,30 @@ describe LinkedList do
       subject.index("R").must_be_nil
     end
 
-    it "has the correct index for value :S" do
-      subject.index(:S).must_be_nil
-    end
-
-    it "has the correct index for value 31" do
-      subject.index(31).must_be_nil
-    end
-
     it "gets the value at index -1" do
-      subject[-1].must_be_nil
+      exception = proc { subject[-1] }.must_raise(IndexError)
+      exception.message.must_equal "index -1 out of bounds for LinkedList of size 0"
     end
 
     it "gets the value at index 0" do
-      subject[0].must_be_nil
-    end
-
-    it "gets the value at index 1" do
-      subject[1].must_be_nil
-    end
-
-    it "gets the value at index 2" do
-      subject[2].must_be_nil
+      exception = proc { subject[0] }.must_raise(IndexError)
+      exception.message.must_equal "index 0 out of bounds for LinkedList of size 0"
     end
 
     it "sets the value at index -1" do
-      subject[-1] = 42
-      subject[-1].must_be_nil
+      exception = proc { subject[-1] = 42 }.must_raise(IndexError)
+      exception.message.must_equal "index -1 out of bounds for LinkedList of size 0"
     end
 
     it "sets the value at index 0" do
-      subject[0] = 42
-      subject[0].must_be_nil
-    end
-
-    it "sets the value at index 1" do
-      subject[1] = 42
-      subject[1].must_be_nil
-    end
-
-    it "sets the value at index 2" do
-      subject[2] = 42
-      subject[2].must_be_nil
+      exception = proc { subject[0] = 42 }.must_raise(IndexError)
+      exception.message.must_equal "index 0 out of bounds for LinkedList of size 0"
     end
 
     it "inserts a value at index -1" do
-      subject.insert(-1, 42).must_be_nil
-      subject.size.must_equal 0
-      subject[-1].must_be_nil
+      exception = proc { subject.insert(-1, 42) }.must_raise(IndexError)
+      exception.message.must_equal "index -1 out of bounds for LinkedList of size 0"
+
       subject.to_a.must_equal []
     end
 
@@ -141,30 +117,16 @@ describe LinkedList do
     end
 
     it "inserts a value at index 1" do
-      subject.insert(1, 42).must_be_nil
-      subject.size.must_equal 0
-      subject[1].must_be_nil
-      subject.to_a.must_equal []
-    end
+      exception = proc { subject.insert(1, 42) }.must_raise(IndexError)
+      exception.message.must_equal "index 1 out of bounds for LinkedList of size 0"
 
-    it "inserts a value at index 2" do
-      subject.insert(2, 42).must_be_nil
-      subject.size.must_equal 0
-      subject[2].must_be_nil
-      subject.to_a.must_equal []
-    end
-
-    it "inserts a value at index 3" do
-      subject.insert(3, 42).must_be_nil
-      subject.size.must_equal 0
-      subject[3].must_be_nil
       subject.to_a.must_equal []
     end
 
     it "deletes the value at index -1" do
-      subject.delete(-1).must_be_nil
-      subject.size.must_equal 0
-      subject[-1].must_be_nil
+      exception = proc { subject.delete(-1) }.must_raise(IndexError)
+      exception.message.must_equal "index -1 out of bounds for LinkedList of size 0"
+
       subject.to_a.must_equal []
 
       GC.start
@@ -172,39 +134,9 @@ describe LinkedList do
     end
 
     it "deletes the value at index 0" do
-      subject.delete(0).must_be_nil
-      subject.size.must_equal 0
-      subject[0].must_be_nil
-      subject.to_a.must_equal []
+      exception = proc { subject.delete(0) }.must_raise(IndexError)
+      exception.message.must_equal "index 0 out of bounds for LinkedList of size 0"
 
-      GC.start
-      ObjectSpace.each_object(LinkedList::Node).count.must_equal 0
-    end
-
-    it "deletes the value at index 1" do
-      subject.delete(1).must_be_nil
-      subject.size.must_equal 0
-      subject[1].must_be_nil
-      subject.to_a.must_equal []
-
-      GC.start
-      ObjectSpace.each_object(LinkedList::Node).count.must_equal 0
-    end
-
-    it "deletes the value at index 2" do
-      subject.delete(2).must_be_nil
-      subject.size.must_equal 0
-      subject[2].must_be_nil
-      subject.to_a.must_equal []
-
-      GC.start
-      ObjectSpace.each_object(LinkedList::Node).count.must_equal 0
-    end
-
-    it "deletes the value at index 3" do
-      subject.delete(3).must_be_nil
-      subject.size.must_equal 0
-      subject[3].must_be_nil
       subject.to_a.must_equal []
 
       GC.start
@@ -301,12 +233,9 @@ describe LinkedList do
       subject.index(:S).must_be_nil
     end
 
-    it "has the correct index for value 31" do
-      subject.index(31).must_be_nil
-    end
-
     it "gets the value at index -1" do
-      subject[-1].must_be_nil
+      exception = proc { subject[-1] }.must_raise(IndexError)
+      exception.message.must_equal "index -1 out of bounds for LinkedList of size 1"
     end
 
     it "gets the value at index 0" do
@@ -314,16 +243,13 @@ describe LinkedList do
     end
 
     it "gets the value at index 1" do
-      subject[1].must_be_nil
-    end
-
-    it "gets the value at index 2" do
-      subject[2].must_be_nil
+      exception = proc { subject[1] }.must_raise(IndexError)
+      exception.message.must_equal "index 1 out of bounds for LinkedList of size 1"
     end
 
     it "sets the value at index -1" do
-      subject[-1] = 42
-      subject[-1].must_be_nil
+      exception = proc { subject[-1] = 42 }.must_raise(IndexError)
+      exception.message.must_equal "index -1 out of bounds for LinkedList of size 1"
     end
 
     it "sets the value at index 0" do
@@ -332,19 +258,14 @@ describe LinkedList do
     end
 
     it "sets the value at index 1" do
-      subject[1] = 42
-      subject[1].must_be_nil
-    end
-
-    it "sets the value at index 2" do
-      subject[2] = 42
-      subject[2].must_be_nil
+      exception = proc { subject[1] = 42 }.must_raise(IndexError)
+      exception.message.must_equal "index 1 out of bounds for LinkedList of size 1"
     end
 
     it "inserts a value at index -1" do
-      subject.insert(-1, 42).must_be_nil
-      subject.size.must_equal 1
-      subject[-1].must_be_nil
+      exception = proc { subject.insert(-1, 42) }.must_raise(IndexError)
+      exception.message.must_equal "index -1 out of bounds for LinkedList of size 1"
+
       subject.to_a.must_equal ["R"]
     end
 
@@ -363,23 +284,16 @@ describe LinkedList do
     end
 
     it "inserts a value at index 2" do
-      subject.insert(2, 42).must_be_nil
-      subject.size.must_equal 1
-      subject[2].must_be_nil
-      subject.to_a.must_equal ["R"]
-    end
+      exception = proc { subject.insert(2, 42) }.must_raise(IndexError)
+      exception.message.must_equal "index 2 out of bounds for LinkedList of size 1"
 
-    it "inserts a value at index 3" do
-      subject.insert(3, 42).must_be_nil
-      subject.size.must_equal 1
-      subject[3].must_be_nil
       subject.to_a.must_equal ["R"]
     end
 
     it "deletes the value at index -1" do
-      subject.delete(-1).must_be_nil
-      subject.size.must_equal 1
-      subject[-1].must_be_nil
+      exception = proc { subject.delete(-1) }.must_raise(IndexError)
+      exception.message.must_equal "index -1 out of bounds for LinkedList of size 1"
+
       subject.to_a.must_equal ["R"]
 
       GC.start
@@ -389,7 +303,10 @@ describe LinkedList do
     it "deletes the value at index 0" do
       subject.delete(0).must_equal "R"
       subject.size.must_equal 0
-      subject[0].must_be_nil
+
+      exception = proc { subject[0] }.must_raise(IndexError)
+      exception.message.must_equal "index 0 out of bounds for LinkedList of size 0"
+
       subject.to_a.must_equal []
 
       GC.start
@@ -397,29 +314,9 @@ describe LinkedList do
     end
 
     it "deletes the value at index 1" do
-      subject.delete(1).must_be_nil
-      subject.size.must_equal 1
-      subject[1].must_be_nil
-      subject.to_a.must_equal ["R"]
+      exception = proc { subject.delete(1) }.must_raise(IndexError)
+      exception.message.must_equal "index 1 out of bounds for LinkedList of size 1"
 
-      GC.start
-      ObjectSpace.each_object(LinkedList::Node).count.must_equal 1
-    end
-
-    it "deletes the value at index 2" do
-      subject.delete(2).must_be_nil
-      subject.size.must_equal 1
-      subject[2].must_be_nil
-      subject.to_a.must_equal ["R"]
-
-      GC.start
-      ObjectSpace.each_object(LinkedList::Node).count.must_equal 1
-    end
-
-    it "deletes the value at index 3" do
-      subject.delete(3).must_be_nil
-      subject.size.must_equal 1
-      subject[3].must_be_nil
       subject.to_a.must_equal ["R"]
 
       GC.start
@@ -524,7 +421,8 @@ describe LinkedList do
     end
 
     it "gets the value at index -1" do
-      subject[-1].must_be_nil
+      exception = proc { subject[-1] }.must_raise(IndexError)
+      exception.message.must_equal "index -1 out of bounds for LinkedList of size 2"
     end
 
     it "gets the value at index 0" do
@@ -536,12 +434,13 @@ describe LinkedList do
     end
 
     it "gets the value at index 2" do
-      subject[2].must_be_nil
+      exception = proc { subject[2] }.must_raise(IndexError)
+      exception.message.must_equal "index 2 out of bounds for LinkedList of size 2"
     end
 
     it "sets the value at index -1" do
-      subject[-1] = 42
-      subject[-1].must_be_nil
+      exception = proc { subject[-1] = 42 }.must_raise(IndexError)
+      exception.message.must_equal "index -1 out of bounds for LinkedList of size 2"
     end
 
     it "sets the value at index 0" do
@@ -555,14 +454,14 @@ describe LinkedList do
     end
 
     it "sets the value at index 2" do
-      subject[2] = 42
-      subject[2].must_be_nil
+      exception = proc { subject[2] = 42 }.must_raise(IndexError)
+      exception.message.must_equal "index 2 out of bounds for LinkedList of size 2"
     end
 
     it "inserts a value at index -1" do
-      subject.insert(-1, 42).must_be_nil
-      subject.size.must_equal 2
-      subject[-1].must_be_nil
+      exception = proc { subject.insert(-1, 42) }.must_raise(IndexError)
+      exception.message.must_equal "index -1 out of bounds for LinkedList of size 2"
+
       subject.to_a.must_equal ["R", :S]
     end
 
@@ -588,16 +487,16 @@ describe LinkedList do
     end
 
     it "inserts a value at index 3" do
-      subject.insert(3, 42).must_be_nil
-      subject.size.must_equal 2
-      subject[3].must_be_nil
+      exception = proc { subject.insert(3, 42) }.must_raise(IndexError)
+      exception.message.must_equal "index 3 out of bounds for LinkedList of size 2"
+
       subject.to_a.must_equal ["R", :S]
     end
 
     it "deletes the value at index -1" do
-      subject.delete(-1).must_be_nil
-      subject.size.must_equal 2
-      subject[-1].must_be_nil
+      exception = proc { subject.delete(-1) }.must_raise(IndexError)
+      exception.message.must_equal "index -1 out of bounds for LinkedList of size 2"
+
       subject.to_a.must_equal ["R", :S]
 
       GC.start
@@ -617,7 +516,10 @@ describe LinkedList do
     it "deletes the value at index 1" do
       subject.delete(1).must_equal :S
       subject.size.must_equal 1
-      subject[1].must_be_nil
+
+      exception = proc { subject[1] }.must_raise(IndexError)
+      exception.message.must_equal "index 1 out of bounds for LinkedList of size 1"
+
       subject.to_a.must_equal ["R"]
 
       GC.start
@@ -625,19 +527,9 @@ describe LinkedList do
     end
 
     it "deletes the value at index 2" do
-      subject.delete(2).must_be_nil
-      subject.size.must_equal 2
-      subject[2].must_be_nil
-      subject.to_a.must_equal ["R", :S]
+      exception = proc { subject.delete(2) }.must_raise(IndexError)
+      exception.message.must_equal "index 2 out of bounds for LinkedList of size 2"
 
-      GC.start
-      ObjectSpace.each_object(LinkedList::Node).count.must_equal 2
-    end
-
-    it "deletes the value at index 3" do
-      subject.delete(3).must_be_nil
-      subject.size.must_equal 2
-      subject[3].must_be_nil
       subject.to_a.must_equal ["R", :S]
 
       GC.start
@@ -745,7 +637,8 @@ describe LinkedList do
     end
 
     it "gets the value at index -1" do
-      subject[-1].must_be_nil
+      exception = proc { subject[-1] }.must_raise(IndexError)
+      exception.message.must_equal "index -1 out of bounds for LinkedList of size 3"
     end
 
     it "gets the value at index 0" do
@@ -761,8 +654,8 @@ describe LinkedList do
     end
 
     it "sets the value at index -1" do
-      subject[-1] = 42
-      subject[-1].must_be_nil
+      exception = proc { subject[-1] = 42 }.must_raise(IndexError)
+      exception.message.must_equal "index -1 out of bounds for LinkedList of size 3"
     end
 
     it "sets the value at index 0" do
@@ -781,9 +674,9 @@ describe LinkedList do
     end
 
     it "inserts a value at index -1" do
-      subject.insert(-1, 42).must_be_nil
-      subject.size.must_equal 3
-      subject[-1].must_be_nil
+      exception = proc { subject.insert(-1, 42) }.must_raise(IndexError)
+      exception.message.must_equal "index -1 out of bounds for LinkedList of size 3"
+
       subject.to_a.must_equal ["R", :S, 31]
     end
 
@@ -816,9 +709,9 @@ describe LinkedList do
     end
 
     it "deletes the value at index -1" do
-      subject.delete(-1).must_be_nil
-      subject.size.must_equal 3
-      subject[-1].must_be_nil
+      exception = proc { subject.delete(-1) }.must_raise(IndexError)
+      exception.message.must_equal "index -1 out of bounds for LinkedList of size 3"
+
       subject.to_a.must_equal ["R", :S, 31]
 
       GC.start
@@ -848,7 +741,10 @@ describe LinkedList do
     it "deletes the value at index 2" do
       subject.delete(2).must_equal 31
       subject.size.must_equal 2
-      subject[2].must_be_nil
+
+      exception = proc { subject[2] }.must_raise(IndexError)
+      exception.message.must_equal "index 2 out of bounds for LinkedList of size 2"
+
       subject.to_a.must_equal ["R", :S]
 
       GC.start
@@ -856,9 +752,9 @@ describe LinkedList do
     end
 
     it "deletes the value at index 3" do
-      subject.delete(3).must_be_nil
-      subject.size.must_equal 3
-      subject[3].must_be_nil
+      exception = proc { subject.delete(3) }.must_raise(IndexError)
+      exception.message.must_equal "index 3 out of bounds for LinkedList of size 3"
+
       subject.to_a.must_equal ["R", :S, 31]
 
       GC.start
