@@ -14,7 +14,7 @@ class LinkedList
 
   # O(1)
   attr_reader :head, :tail
-  protected :head, :tail
+  private :head, :tail
 
   #################################################################################################
 
@@ -130,9 +130,9 @@ class LinkedList
   end
 
   # O(n)
-  def to_a
-    map { |value| value }
-  end
+  # def to_a
+  #   map { |value| value }
+  # end
 
   # O(n)
   def to_s
@@ -163,7 +163,7 @@ class LinkedList
       current = current.next
     end
   end
-  protected :each_node
+  private :each_node
 
   # O(n)
   def each_node_with_index
@@ -177,7 +177,7 @@ class LinkedList
       index   += 1
     end
   end
-  protected :each_node_with_index
+  private :each_node_with_index
 
   #################################################################################################
 
