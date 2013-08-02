@@ -1,4 +1,4 @@
-require_relative "linked_list/node"
+require "linked_list/node"
 
 class LinkedList
   # O(n)
