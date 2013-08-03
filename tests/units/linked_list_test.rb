@@ -22,7 +22,7 @@ describe LinkedList do
     end
 
     it "shifts an item" do
-      subject.shift(42).must_equal 1
+      subject.shift(42).must_equal 42
       subject.size.must_equal 1
       subject.first.must_equal 42
       subject.last.must_equal 42
@@ -37,7 +37,7 @@ describe LinkedList do
     end
 
     it "pushes an item" do
-      subject.push(42).must_equal 1
+      subject.push(42).must_equal 42
       subject.size.must_equal 1
       subject.first.must_equal 42
       subject.last.must_equal 42
@@ -110,7 +110,7 @@ describe LinkedList do
     end
 
     it "inserts a value at index 0" do
-      subject.insert(0, 42).must_equal 1
+      subject.insert(0, 42).must_equal 42
       subject.size.must_equal 1
       subject[0].must_equal 42
       subject.to_a.must_equal [42]
@@ -166,7 +166,7 @@ describe LinkedList do
     end
 
     it "shifts an item" do
-      subject.shift(42).must_equal 2
+      subject.shift(42).must_equal 42
       subject.size.must_equal 2
       subject.first.must_equal 42
       subject.last.must_equal "R"
@@ -182,7 +182,7 @@ describe LinkedList do
     end
 
     it "pushes an item" do
-      subject.push(42).must_equal 2
+      subject.push(42).must_equal 42
       subject.size.must_equal 2
       subject.first.must_equal "R"
       subject.last.must_equal 42
@@ -270,14 +270,14 @@ describe LinkedList do
     end
 
     it "inserts a value at index 0" do
-      subject.insert(0, 42).must_equal 2
+      subject.insert(0, 42).must_equal 42
       subject.size.must_equal 2
       subject[0].must_equal 42
       subject.to_a.must_equal [42, "R"]
     end
 
     it "inserts a value at index 1" do
-      subject.insert(1, 42).must_equal 2
+      subject.insert(1, 42).must_equal 42
       subject.size.must_equal 2
       subject[1].must_equal 42
       subject.to_a.must_equal ["R", 42]
@@ -346,7 +346,7 @@ describe LinkedList do
     end
 
     it "shifts an item" do
-      subject.shift(42).must_equal 3
+      subject.shift(42).must_equal 42
       subject.size.must_equal 3
       subject.first.must_equal 42
       subject.last.must_equal :S
@@ -363,7 +363,7 @@ describe LinkedList do
     end
 
     it "pushes an item" do
-      subject.push(42).must_equal 3
+      subject.push(42).must_equal 42
       subject.size.must_equal 3
       subject.first.must_equal "R"
       subject.last.must_equal 42
@@ -466,21 +466,21 @@ describe LinkedList do
     end
 
     it "inserts a value at index 0" do
-      subject.insert(0, 42).must_equal 3
+      subject.insert(0, 42).must_equal 42
       subject.size.must_equal 3
       subject[0].must_equal 42
       subject.to_a.must_equal [42, "R", :S]
     end
 
     it "inserts a value at index 1" do
-      subject.insert(1, 42).must_equal 3
+      subject.insert(1, 42).must_equal 42
       subject.size.must_equal 3
       subject[1].must_equal 42
       subject.to_a.must_equal ["R", 42, :S]
     end
 
     it "inserts a value at index 2" do
-      subject.insert(2, 42).must_equal 3
+      subject.insert(2, 42).must_equal 42
       subject.size.must_equal 3
       subject[2].must_equal 42
       subject.to_a.must_equal ["R", :S, 42]
@@ -559,7 +559,7 @@ describe LinkedList do
     end
 
     it "shifts an item" do
-      subject.shift(42).must_equal 4
+      subject.shift(42).must_equal 42
       subject.size.must_equal 4
       subject.first.must_equal 42
       subject.last.must_equal 31
@@ -577,7 +577,7 @@ describe LinkedList do
     end
 
     it "pushes an item" do
-      subject.push(42).must_equal 4
+      subject.push(42).must_equal 42
       subject.size.must_equal 4
       subject.first.must_equal "R"
       subject.last.must_equal 42
@@ -681,28 +681,28 @@ describe LinkedList do
     end
 
     it "inserts a value at index 0" do
-      subject.insert(0, 42).must_equal 4
+      subject.insert(0, 42).must_equal 42
       subject.size.must_equal 4
       subject[0].must_equal 42
       subject.to_a.must_equal [42, "R", :S, 31]
     end
 
     it "inserts a value at index 1" do
-      subject.insert(1, 42).must_equal 4
+      subject.insert(1, 42).must_equal 42
       subject.size.must_equal 4
       subject[1].must_equal 42
       subject.to_a.must_equal ["R", 42, :S, 31]
     end
 
     it "inserts a value at index 2" do
-      subject.insert(2, 42).must_equal 4
+      subject.insert(2, 42).must_equal 42
       subject.size.must_equal 4
       subject[2].must_equal 42
       subject.to_a.must_equal ["R", :S, 42, 31]
     end
 
     it "inserts a value at index 3" do
-      subject.insert(3, 42).must_equal 4
+      subject.insert(3, 42).must_equal 42
       subject.size.must_equal 4
       subject[3].must_equal 42
       subject.to_a.must_equal ["R", :S, 31, 42]

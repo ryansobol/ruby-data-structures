@@ -46,7 +46,7 @@ class LinkedList
       head.next.prev = head
     end
 
-    size
+    value
   end
 
   # O(1)
@@ -81,7 +81,7 @@ class LinkedList
       tail.prev.next = tail
     end
 
-    size
+    value
   end
 
   # O(1)
@@ -219,12 +219,14 @@ class LinkedList
     return push(value)  if key == size
     return shift(value) if key == 0
 
+    @size += 1
+
     nexxt = each_node_with_index { |node, index| break node if key == index }
     prevv = nexxt.prev
 
     prevv.next = nexxt.prev = LinkedList::Node.new(value, prevv, nexxt)
 
-    @size += 1
+    value
   end
 
   # O(n)
