@@ -22,7 +22,7 @@ class StaticArray
       raise IndexError, "index #{index} out of bounds for #{self.class} of size #{size}"
     end
 
-    data.get(head + index * word)
+    data.get(index_2_address(index))
   end
 
   # O(1)
@@ -31,6 +31,13 @@ class StaticArray
       raise IndexError, "index #{index} out of bounds for #{self.class} of size #{size}"
     end
 
-    data.set(head + index * word, value)
+    data.set(index_2_address(index), value)
+  end
+
+  private
+
+  # O(1)
+  def index_2_address(index)
+    head + index * word
   end
 end
