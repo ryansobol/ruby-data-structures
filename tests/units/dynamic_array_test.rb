@@ -162,4 +162,114 @@ describe DynamicArray do
       subject[-3].must_be_nil
     end
   end
+
+  #################################################################################################
+
+  describe "#push" do
+    subject { DynamicArray.new }
+
+    it "pushes another value" do
+      subject.push("J").must_equal "J"
+
+      subject.size.must_equal 1
+      subject.capacity.must_equal 4
+    end
+
+    it "pushes another value" do
+      subject.push("J")
+      subject.push("A").must_equal "A"
+
+      subject.size.must_equal 2
+      subject.capacity.must_equal 4
+    end
+
+    it "pushes another value" do
+      subject.push("J")
+      subject.push("A")
+      subject.push("N").must_equal "N"
+
+      subject.size.must_equal 3
+      subject.capacity.must_equal 4
+    end
+
+    it "pushes another value" do
+      subject.push("J")
+      subject.push("A")
+      subject.push("N")
+      subject.push("E").must_equal "E"
+
+      subject.size.must_equal 4
+      subject.capacity.must_equal 4
+    end
+
+    it "pushes another value" do
+      subject.push("J")
+      subject.push("A")
+      subject.push("N")
+      subject.push("E")
+      subject.push("Y").must_equal "Y"
+
+      subject.size.must_equal 5
+      subject.capacity.must_equal 10
+    end
+  end
+
+  #################################################################################################
+
+  describe "#pop" do
+    subject { DynamicArray.new }
+
+    before do
+      subject.push("J")
+      subject.push("A")
+      subject.push("N")
+      subject.push("E")
+      subject.push("Y")
+    end
+
+    it "pops another value" do
+      subject.pop.must_equal "Y"
+
+      subject.size.must_equal 4
+      subject.capacity.must_equal 10
+    end
+
+    it "pops another value" do
+      subject.pop
+      subject.pop.must_equal "E"
+
+      subject.size.must_equal 3
+      subject.capacity.must_equal 10
+    end
+
+    it "pops another value" do
+      subject.pop
+      subject.pop
+      subject.pop.must_equal "N"
+
+      subject.size.must_equal 2
+      subject.capacity.must_equal 4
+    end
+
+    it "pops another value" do
+      subject.pop
+      subject.pop
+      subject.pop
+      subject.pop.must_equal "A"
+
+      subject.size.must_equal 1
+      subject.capacity.must_equal 4
+    end
+
+    it "pops another value" do
+      subject.pop
+      subject.pop
+      subject.pop
+      subject.pop
+      subject.pop.must_equal "J"
+
+      subject.size.must_equal 0
+      subject.capacity.must_equal 4
+    end
+  end
 end

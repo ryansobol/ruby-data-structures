@@ -25,7 +25,9 @@ class DynamicArray
   def resize(new_capacity)
     new_data = StaticArray.new(new_capacity)
 
-    for i in 0...data.size do
+    stop = new_capacity > capacity ? capacity : new_capacity
+
+    for i in 0...stop do
       new_data[i] = data[i]
     end
 
@@ -63,9 +65,19 @@ class DynamicArray
   #################################################################################################
 
   def push(value)
+    resize((size + 1) * 2) if size == capacity
+    data[size] = value
+    @size += 1
+    value
   end
 
   def pop
+    @size -= 1
+    temp = data[size]
+    data[size] = nil
+    new_capacity = capacity / 4.0
+    resize(size * 2) if capacity / 4.0 > size && capacty > CAPACTIY
+    temp
   end
 
   #################################################################################################
