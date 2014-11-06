@@ -1,16 +1,16 @@
 class Stack
   # O(1)
   def initialize
-    @size = 0
     @data = []
+    @size = 0
   end
-
-  # O(1)
-  attr_reader :size
 
   # O(1)
   attr_reader :data
   private :data
+
+  # O(1)
+  attr_reader :size
 
   # O(1)
   def empty?
@@ -35,10 +35,5 @@ class Stack
     temp = data[size]
     data[size] = nil
     temp
-  end
-
-  # O(1)
-  def at(index)
-    data[index]
   end
 end
