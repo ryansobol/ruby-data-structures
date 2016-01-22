@@ -21,15 +21,15 @@ describe LinkedList do
       subject.last.must_be_nil
     end
 
-    it "shifts an item" do
-      subject.shift(42).must_equal 42
+    it "unshifts an item" do
+      subject.unshift(42).must_equal 42
       subject.size.must_equal 1
       subject.first.must_equal 42
       subject.last.must_equal 42
     end
 
-    it "unshifts all items" do
-      subject.unshift.must_be_nil
+    it "shifts all items" do
+      subject.shift.must_be_nil
       subject.size.must_equal 0
 
       GC.start
