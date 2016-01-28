@@ -30,7 +30,7 @@ class LinkedList
   end
 
   # O(1)
-  def shift(value)
+  def unshift(value)
     @size += 1
     @head = Node.new(value, nil, head)
 
@@ -44,7 +44,7 @@ class LinkedList
   end
 
   # O(1)
-  def unshift
+  def shift
     return nil if empty?
 
     @size -= 1
